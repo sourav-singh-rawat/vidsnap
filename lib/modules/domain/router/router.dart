@@ -11,7 +11,11 @@ abstract class AppRouter implements AppModule<void> {
     return instance;
   }
 
-  Future<T?> push<T extends Object?>(BuildContext context, Route<T> route);
+  Future<T?> push<T extends Object?>(BuildContext context, Widget widget);
+
   bool canPop(BuildContext context);
+
   void pop<T extends Object?>(BuildContext context, [T? result]);
+
+  Future<T?> pushReplacement<T extends Object?, TO extends Object?>(BuildContext context, Widget widget, {TO? result});
 }

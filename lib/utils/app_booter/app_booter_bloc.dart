@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vidsnap/modules/domain/module.dart';
 
@@ -14,10 +12,7 @@ class AppBooterBloc extends Bloc<AppBooterEvent, AppBooterState> {
   }
 
   void _bootUp(BootUpEvent event, Emitter<AppBooterState> emit) async {
-    final bootUpProcesses = UnmodifiableListView<Future<dynamic>>([
-      AppModule.instance.bootUp(),
-    ]);
-    await Future.wait(bootUpProcesses);
+    await AppModule.instance.bootUp();
 
     emit(
       state.copyWith(
@@ -30,8 +25,6 @@ class AppBooterBloc extends Bloc<AppBooterEvent, AppBooterState> {
 
   void _onBootUp() async {
     AppModule.instance.onBootUp();
-
-    // AppRouter.instance
   }
 
   void _bootDown(BootDownEvent event, Emitter<AppBooterState> emit) {

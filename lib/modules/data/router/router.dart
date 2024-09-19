@@ -26,11 +26,27 @@ class AppRouterImpl implements AppRouter {
 
   @override
   void pop<T extends Object?>(BuildContext context, [T? result]) {
-    Navigator.pop(context, result);
+    Navigator.pop<T>(context, result);
   }
 
   @override
-  Future<T?> push<T extends Object?>(BuildContext context, Route<T> route) {
-    return Navigator.push(context, route);
+  Future<T?> push<T extends Object?>(BuildContext context, Widget widget) {
+    return Navigator.push<T>(
+      context,
+      MaterialPageRoute<T>(
+        builder: (context) => widget,
+      ),
+    );
+  }
+
+  @override
+  Future<T?> pushReplacement<T extends Object?, TO extends Object?>(BuildContext context, Widget widget, {TO? result}) {
+    return Navigator.pushReplacement<T, TO>(
+      context,
+      MaterialPageRoute<T>(
+        builder: (context) => widget,
+      ),
+      result: result,
+    );
   }
 }

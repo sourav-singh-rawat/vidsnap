@@ -4,6 +4,10 @@ sealed class AppBooterEvent {
   const AppBooterEvent();
 }
 
-final class BootUpEvent extends AppBooterEvent {}
+final class BootUpEvent extends AppBooterEvent {
+  const BootUpEvent();
+}
 
-final class BootDownEvent extends AppBooterEvent {}
+final class BootDownEvent extends AppBooterEvent {
+  const BootDownEvent();
+}
