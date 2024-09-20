@@ -10,12 +10,15 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
   CameraBloc() : super(CameraState.init()) {
     on<InitializeCamera>(_initializeCamera);
     on<DisposeCamera>(_disposeCamera);
+    on<SwitchCameraLens>(_switchCameraLens);
+    on<OnPressedRecordingBtn>(_onPressedRecordingBtn);
   }
 
   void _initializeCamera(InitializeCamera event, Emitter<CameraState> emit) async {
     if (state.isCameraInitialized) {
       emit.call(state.copyWith(
         isCameraInitialized: false,
+        isRecording: false,
       ));
     }
 
@@ -29,6 +32,7 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
 
     emit.call(state.copyWith(
       isCameraInitialized: isInitialized,
+      isRecording: false,
     ));
   }
 
@@ -38,9 +42,24 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
 
       emit.call(state.copyWith(
         isCameraInitialized: false,
+        isRecording: false,
       ));
     } catch (error) {
       AppSnack.show(context: event.context, text: error.toString());
     }
+  }
+
+  void _switchCameraLens(SwitchCameraLens event, Emitter<CameraState> emit) async {
+    try {
+      await AppCamera.instance.switchCamera();
+    } catch (error) {
+      AppSnack.show(context: event.context, text: error.toString());
+    }
+  }
+
+  void _onPressedRecordingBtn(OnPressedRecordingBtn event, Emitter<CameraState> emit) {
+    emit.call(state.copyWith(
+      isRecording: !state.isRecording,
+    ));
   }
 }

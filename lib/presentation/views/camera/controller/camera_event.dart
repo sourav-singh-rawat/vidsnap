@@ -12,3 +12,11 @@ final class InitializeCamera extends CameraEvent {
 final class DisposeCamera extends CameraEvent {
   DisposeCamera(super.context);
 }
+
+final class SwitchCameraLens extends CameraEvent {
+  SwitchCameraLens(super.context);
+}
+
+final class OnPressedRecordingBtn extends CameraEvent {
+  OnPressedRecordingBtn(super.context);
+}
