@@ -110,15 +110,32 @@ class AppCameraImpl implements AppCamera {
   }
 
   @override
-  Future<void> startRecording() {
-    // TODO: implement startRecording
-    throw UnimplementedError();
+  Future<void> startRecording() async {
+    if (controller == null) {
+      throw ErrorDescription('Turn on the camera.');
+    }
+
+    try {
+      await controller!.prepareForVideoRecording();
+      await controller!.startVideoRecording();
+    } catch (error) {
+      log("[AppCamera][startRecording]: Error: $error");
+      rethrow;
+    }
   }
 
   @override
-  Future<void> stopRecording() {
-    // TODO: implement stopRecording
-    throw UnimplementedError();
+  Future<String> stopRecording() async {
+    if (controller == null) {
+      throw ErrorDescription('Opps, Something went wrong. Video not saved!');
+    }
+    try {
+      final video = await controller!.stopVideoRecording();
+      return video.path;
+    } catch (error) {
+      log("[AppCamera][stopRecording]: Error: $error");
+      rethrow;
+    }
   }
 
   @override

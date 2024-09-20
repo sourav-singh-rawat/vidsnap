@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vidsnap/modules/domain/camera/camera.dart';
 import 'package:vidsnap/modules/domain/router/router.dart';
@@ -7,7 +8,9 @@ import 'package:vidsnap/presentation/core_widgets/scaffold.dart';
 import 'package:vidsnap/presentation/views/camera/controller/camera_bloc.dart';
 
 part 'widgets/action_bar.dart';
+part 'widgets/back_button.dart';
 part 'widgets/camera_preview.dart';
+part 'widgets/timer.dart';
 
 class CameraView extends StatefulWidget {
   const CameraView({super.key});
@@ -52,14 +55,9 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        leading: IconButton(
-          onPressed: () => AppRouter.instance.pop(context),
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            size: 24,
-            color: Colors.white,
-          ),
-        ),
+        leading: const _BackButton(),
+        title: const _Timer(),
+        centerTitle: true,
       ),
       body: const _CameraPreview(),
       bottomSheet: const _ActionBar(),

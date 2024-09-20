@@ -17,6 +17,7 @@ class _CameraPreview extends StatelessWidget {
                 return AppCamera.instance.cameraPreview();
               }
 
+              //TODO: capture thumbnail
               return const Center(
                 child: CircularProgressIndicator(),
               );

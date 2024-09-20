@@ -16,7 +16,7 @@ abstract class AppCamera implements AppModule<void> {
 
   Future<void> startRecording();
 
-  Future<void> stopRecording();
+  Future<String> stopRecording();
 
   Future<void> dispose();
 }
