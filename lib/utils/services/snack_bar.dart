@@ -26,7 +26,7 @@ class AppSnack {
     VoidCallback? onPressedAction,
   }) {
     if (type == AppSnackType.message) {
-      backgroundColor = Colors.blueAccent;
+      backgroundColor = Colors.deepPurpleAccent;
     }
 
     final snackBar = SnackBar(
