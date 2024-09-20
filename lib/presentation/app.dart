@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vidsnap/presentation/views/camera/controller/camera_bloc.dart';
+import 'package:vidsnap/presentation/views/home/controller/home_bloc.dart';
 import 'package:vidsnap/presentation/views/home/view.dart';
 import 'package:vidsnap/presentation/views/splash/view.dart';
 import 'package:vidsnap/utils/app_booter/app_booter_bloc.dart';
@@ -45,6 +47,10 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,
+          bottomSheetTheme: const BottomSheetThemeData(
+            backgroundColor: Colors.transparent,
+            surfaceTintColor: Colors.transparent,
+          ),
         ),
         home: BlocSelector<AppBooterBloc, AppBooterState, AppBooterStatus>(
           selector: (state) => state.bootStatus,
@@ -76,8 +82,14 @@ class _AppBlocRegistry extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AppBooterBloc>(
-          create: (context) => AppBooterBloc()..add(BootUpEvent()),
+          create: (context) => AppBooterBloc()..add(const BootUpEvent()),
           lazy: false,
+        ),
+        BlocProvider<HomeBloc>(
+          create: (context) => HomeBloc(),
+        ),
+        BlocProvider<CameraBloc>(
+          create: (context) => CameraBloc(),
         ),
       ],
       child: child,
