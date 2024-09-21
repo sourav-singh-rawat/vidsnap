@@ -17,12 +17,13 @@ class _VideoTile extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          AppVideoThumbnail(
+            dataSource: recordedFile.uri,
             width: 150,
             height: 80,
-            color: Colors.black,
+            borderRadius: 8,
           ),
-          const SizedBox(width: 24),
+          const SizedBox(width: 20),
           Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
