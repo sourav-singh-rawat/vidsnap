@@ -12,5 +12,5 @@ abstract class AppFileManager implements AppModule<void> {
   }
 
   Future<void> listFiles();
-  Future<void> saveFile(Uint8List bytes);
+  Future<String> saveFile(Uint8List bytes);
 }

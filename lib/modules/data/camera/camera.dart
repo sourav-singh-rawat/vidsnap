@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:vidsnap/modules/domain/camera/camera.dart';
+import 'package:vidsnap/repository/repository.dart';
 
 part 'utils/helper.dart';
 
@@ -131,7 +132,9 @@ class AppCameraImpl implements AppCamera {
     }
     try {
       final video = await controller!.stopVideoRecording();
-      return video.path;
+      final bytes = await video.readAsBytes();
+      final path = await AppRepository.fileManager.saveFile(bytes);
+      return path;
     } catch (error) {
       log("[AppCamera][stopRecording]: Error: $error");
       rethrow;
