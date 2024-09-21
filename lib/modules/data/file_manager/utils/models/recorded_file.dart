@@ -2,9 +2,11 @@ part of '../../file_manager.dart';
 
 class AppRecordedFile {
   final String path;
+  final Uri uri;
   final DateTime modified;
   AppRecordedFile({
     required this.path,
+    required this.uri,
     required this.modified,
   });
 
@@ -26,6 +28,7 @@ class AppRecordedFile {
 
     return AppRecordedFile(
       path: file.path,
+      uri: file.uri,
       modified: modified,
     );
   }
