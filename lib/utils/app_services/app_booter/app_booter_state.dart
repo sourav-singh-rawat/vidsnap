@@ -1,4 +1,4 @@
-part of 'app_booter_bloc.dart';
+part of '../app_services.dart';
 
 enum AppBooterStatus { booting, booted }
 

@@ -1,7 +1,7 @@
 import 'dart:collection';
 
 import 'package:vidsnap/modules/data/module.dart';
-import 'package:vidsnap/utils/app_booter/app_booter_bloc.dart';
+import 'package:vidsnap/utils/app_services/app_services.dart';
 
 abstract class AppModule<T> implements Booter<T> {
   static final AppModule instance = AppModuleImpl();

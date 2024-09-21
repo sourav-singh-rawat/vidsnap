@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vidsnap/modules/domain/camera/camera.dart';
-import 'package:vidsnap/presentation/core_widgets/snack_bar.dart';
+import 'package:vidsnap/repository/repository.dart';
+import 'package:vidsnap/utils/app_services/app_services.dart';
 
 part 'camera_event.dart';
 part 'camera_state.dart';
@@ -25,9 +25,9 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
     bool isInitialized = false;
 
     try {
-      isInitialized = await AppCamera.instance.initialize();
+      isInitialized = await AppRepository.camera.initialize();
     } catch (error) {
-      AppSnack.show(context: event.context, text: error.toString());
+      AppService.snack.show(context: event.context, text: error.toString());
     }
 
     emit.call(state.copyWith(
@@ -42,22 +42,22 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
         await _stopRecording(emit);
       }
 
-      await AppCamera.instance.dispose();
+      await AppRepository.camera.dispose();
 
       emit.call(state.copyWith(
         isCameraInitialized: false,
         isRecording: false,
       ));
     } catch (error) {
-      AppSnack.show(context: event.context, text: error.toString());
+      AppService.snack.show(context: event.context, text: error.toString());
     }
   }
 
   void _switchCameraLens(SwitchCameraLens event, Emitter<CameraState> emit) async {
     try {
-      await AppCamera.instance.switchCamera();
+      await AppRepository.camera.switchCamera();
     } catch (error) {
-      AppSnack.show(context: event.context, text: error.toString());
+      AppService.snack.show(context: event.context, text: error.toString());
     }
   }
 
@@ -69,13 +69,13 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
         await _startRecording(emit);
       }
     } catch (error) {
-      AppSnack.show(context: event.context, text: error.toString());
+      AppService.snack.show(context: event.context, text: error.toString());
     }
   }
 
   Future<void> _startRecording(Emitter<CameraState> emit) async {
     try {
-      await AppCamera.instance.startRecording();
+      await AppRepository.camera.startRecording();
 
       emit.call(state.copyWith(
         isRecording: true,
@@ -87,7 +87,7 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
 
   Future<void> _stopRecording(Emitter<CameraState> emit) async {
     try {
-      final videoPath = await AppCamera.instance.stopRecording();
+      final videoPath = await AppRepository.camera.stopRecording();
       //TODO: show preview with this path
 
       emit.call(state.copyWith(

@@ -6,7 +6,7 @@ import 'package:vidsnap/presentation/views/camera/controller/camera_bloc.dart';
 import 'package:vidsnap/presentation/views/home/controller/home_bloc.dart';
 import 'package:vidsnap/presentation/views/home/view.dart';
 import 'package:vidsnap/presentation/views/splash/view.dart';
-import 'package:vidsnap/utils/app_booter/app_booter_bloc.dart';
+import 'package:vidsnap/utils/app_services/app_services.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});

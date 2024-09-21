@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
+part of '../app_services.dart';
 
 const Duration kSnackBarDisplayDuration = Duration(milliseconds: 3000);
 
 enum AppSnackType { error, message }
 
-class AppSnack {
-  AppSnack._();
+class _AppSnack {
+  _AppSnack();
 
-  static void show({
+  void show({
     required BuildContext context,
     AppSnackType type = AppSnackType.error,
     Widget? leading,
@@ -71,7 +71,7 @@ class AppSnack {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-  static void hide(BuildContext context) {
+  void hide(BuildContext context) {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
   }
 }

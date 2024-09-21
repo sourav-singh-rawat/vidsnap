@@ -1,4 +1,4 @@
-part of 'app_booter_bloc.dart';
+part of '../app_services.dart';
 
 //A sealed class cannot be extended outside of its library (file).
 sealed class AppBooterEvent {

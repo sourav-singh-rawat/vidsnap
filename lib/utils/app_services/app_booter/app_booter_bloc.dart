@@ -1,9 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vidsnap/modules/domain/module.dart';
-
-part 'app_booter_event.dart';
-part 'app_booter_state.dart';
-part 'booter_abstract.dart';
+part of '../app_services.dart';
 
 class AppBooterBloc extends Bloc<AppBooterEvent, AppBooterState> {
   AppBooterBloc() : super(AppBooterState.init()) {

@@ -14,7 +14,7 @@ class _CameraPreview extends StatelessWidget {
             selector: (state) => state.isCameraInitialized,
             builder: (context, isCameraInitialized) {
               if (isCameraInitialized) {
-                return AppCamera.instance.cameraPreview();
+                return AppRepository.camera.cameraPreview();
               }
 
               //TODO: capture thumbnail
