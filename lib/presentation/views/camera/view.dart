@@ -36,6 +36,10 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
     }
 
     if (state == AppLifecycleState.inactive) {
+      if (!AppCamera.instance.isInitialized) {
+        return;
+      }
+
       context.read<CameraBloc>().add(DisposeCamera(context));
     } else if (state == AppLifecycleState.resumed) {
       context.read<CameraBloc>().add(InitializeCamera(context));
