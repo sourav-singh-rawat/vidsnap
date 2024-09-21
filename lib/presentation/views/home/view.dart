@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vidsnap/modules/data/file_manager/file_manager.dart';
 import 'package:vidsnap/presentation/core_widgets/buttons/clickable.dart';
 import 'package:vidsnap/presentation/core_widgets/scaffold.dart';
-import 'package:vidsnap/presentation/core_widgets/video_thumbnail.dart';
+import 'package:vidsnap/presentation/core_widgets/video/video_thumbnail.dart';
 import 'package:vidsnap/presentation/views/home/controller/home_bloc.dart';
 
 part 'widgets/camera_button.dart';
