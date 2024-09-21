@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vidsnap/modules/domain/camera/camera.dart';
-import 'package:vidsnap/utils/services/snack_bar.dart';
+import 'package:vidsnap/presentation/core_widgets/snack_bar.dart';
 
 part 'camera_event.dart';
 part 'camera_state.dart';
