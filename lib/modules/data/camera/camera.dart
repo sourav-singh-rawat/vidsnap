@@ -64,7 +64,7 @@ class AppCameraImpl implements AppCamera {
 
   Future<CameraController> _initializeCameraController(CameraDescription camera) async {
     try {
-      final controller = CameraController(deviceAvailableCameras![0], ResolutionPreset.max);
+      final controller = CameraController(camera, ResolutionPreset.max);
       await controller.initialize();
 
       return controller;
