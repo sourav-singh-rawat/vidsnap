@@ -53,6 +53,12 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
   }
 
   @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AppScaffold(
       extendBodyBehindAppBar: true,
