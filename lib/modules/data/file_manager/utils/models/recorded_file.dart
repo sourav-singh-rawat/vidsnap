@@ -1,15 +1,15 @@
 part of '../../file_manager.dart';
 
-class AppRecordedVideo {
+class AppRecordedFile {
   final String path;
   final DateTime modified;
-  AppRecordedVideo({
+  AppRecordedFile({
     required this.path,
     required this.modified,
   });
 
   String get name {
-    return '${modified.month}_${modified.day}_${modified.year}-${modified.hour}:${modified.minute}';
+    return '${modified.month}_${modified.day}_${modified.year}-${modified.hour}_${modified.minute}_${modified.second}';
   }
 
   String get formattedModifiedDate {
@@ -20,11 +20,11 @@ class AppRecordedVideo {
     return '${modified.hour}:${modified.minute}:${modified.second}:${modified.millisecond}';
   }
 
-  factory AppRecordedVideo.fromFileEntity(FileSystemEntity file) {
+  factory AppRecordedFile.fromFileEntity(FileSystemEntity file) {
     final fileName = file.path.toFileName;
     final modified = fileName.toModifiedDate;
 
-    return AppRecordedVideo(
+    return AppRecordedFile(
       path: file.path,
       modified: modified,
     );

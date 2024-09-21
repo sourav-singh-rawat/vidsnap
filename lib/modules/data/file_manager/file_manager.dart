@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:vidsnap/modules/domain/file_manager/file_manager.dart';
 
-part 'utils/models/recorded_video.dart';
+part 'utils/models/recorded_file.dart';
 
 const kRecordingFileDirectory = 'recording';
 
