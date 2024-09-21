@@ -7,8 +7,8 @@ class AppVideoPlayerImpl implements AppVideoPlayer {
 
   late VideoPlayerController controller;
 
-  AppVideoPlayerImpl.asset(String dataSource) {
-    controller = VideoPlayerController.asset(
+  AppVideoPlayerImpl.asset(Uri dataSource) {
+    controller = VideoPlayerController.contentUri(
       dataSource,
     );
   }
@@ -34,6 +34,9 @@ class AppVideoPlayerImpl implements AppVideoPlayer {
   }
 
   @override
+  bool get isInitialized => controller.value.isInitialized;
+
+  @override
   Future<void> play() async {
     await controller.play();
   }
@@ -43,6 +46,7 @@ class AppVideoPlayerImpl implements AppVideoPlayer {
     await controller.pause();
   }
 
+  @override
   Widget playerPreview() {
     return VideoPlayer(controller);
   }
