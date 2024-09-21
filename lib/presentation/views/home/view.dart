@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vidsnap/modules/data/file_manager/file_manager.dart';
+import 'package:vidsnap/presentation/core_widgets/buttons/clickable.dart';
 import 'package:vidsnap/presentation/core_widgets/scaffold.dart';
 import 'package:vidsnap/presentation/views/home/controller/home_bloc.dart';
 
 part 'widgets/camera_button.dart';
-part 'widgets/recorded_videos.dart';
+part 'widgets/recorded_video_header.dart';
+part 'widgets/recorded_videos/recorded_videos.dart';
+part 'widgets/recorded_videos/video_tile.dart';
 part 'widgets/video_player.dart';
 
 class HomeView extends StatefulWidget {
@@ -41,8 +44,12 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return const AppScaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _VideoPlayer(),
+          SizedBox(height: 16),
+          _RecordedVideosHeader(),
+          SizedBox(height: 16),
           _RecordedVideos(),
         ],
       ),

@@ -20,7 +20,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       final recordingDirectory = await AppRepository.fileManager.recordingDirectory;
       final files = AppRepository.fileManager.getFiles(recordingDirectory);
 
-      final data = files.map((v) => AppRecordedVideo.fromFileEntity(v)).toList();
+      final data = files.map((v) => AppRecordedFile.fromFileEntity(v)).toList();
 
       emit.call(state.copyWith(
         recordedVideos: data,

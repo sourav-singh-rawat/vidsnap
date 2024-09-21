@@ -7,7 +7,7 @@ class _VideoPlayer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.maxFinite,
-      height: 300,
+      height: 250,
       color: Colors.black,
     );
   }
