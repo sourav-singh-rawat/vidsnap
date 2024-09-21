@@ -1,11 +1,21 @@
 part of 'home_bloc.dart';
 
 class HomeState {
-  const HomeState();
+  final List<AppRecordedVideo> recordedVideos;
+  const HomeState({
+    required this.recordedVideos,
+  });
 
-  HomeState.init() : this();
+  HomeState.init()
+      : this(
+          recordedVideos: [],
+        );
 
-  HomeState copyWith() {
-    return HomeState();
+  HomeState copyWith({
+    List<AppRecordedVideo>? recordedVideos,
+  }) {
+    return HomeState(
+      recordedVideos: recordedVideos ?? this.recordedVideos,
+    );
   }
 }

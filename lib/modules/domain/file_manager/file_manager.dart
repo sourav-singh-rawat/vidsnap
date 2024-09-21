@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:vidsnap/modules/data/file_manager/file_manager.dart';
 import 'package:vidsnap/modules/domain/module.dart';
@@ -11,6 +14,9 @@ abstract class AppFileManager implements AppModule<void> {
     return instance;
   }
 
-  Future<void> listFiles();
-  Future<String> saveFile(Uint8List bytes);
+  Future<Directory> get recordingDirectory;
+
+  List<FileSystemEntity> getFiles(Directory directory);
+
+  Future<String> saveFile(Directory directory, Uint8List bytes);
 }

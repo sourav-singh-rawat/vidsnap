@@ -1,10 +1,14 @@
 part of 'home_bloc.dart';
 
-sealed class HomeEvent {}
+sealed class HomeEvent {
+  final BuildContext context;
+  HomeEvent(this.context);
+}
+
+final class FetchRecordedFiles extends HomeEvent {
+  FetchRecordedFiles(super.context);
+}
 
 final class OnPressedCameraBtn extends HomeEvent {
-  final BuildContext context;
-  OnPressedCameraBtn({
-    required this.context,
-  });
+  OnPressedCameraBtn(super.context);
 }

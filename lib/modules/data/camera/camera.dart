@@ -133,7 +133,10 @@ class AppCameraImpl implements AppCamera {
     try {
       final video = await controller!.stopVideoRecording();
       final bytes = await video.readAsBytes();
-      final path = await AppRepository.fileManager.saveFile(bytes);
+
+      final recordingDirectory = await AppRepository.fileManager.recordingDirectory;
+
+      final path = await AppRepository.fileManager.saveFile(recordingDirectory, bytes);
       return path;
     } catch (error) {
       log("[AppCamera][stopRecording]: Error: $error");
