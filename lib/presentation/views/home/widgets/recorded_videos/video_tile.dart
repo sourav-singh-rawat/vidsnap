@@ -42,6 +42,7 @@ class _VideoTile extends StatelessWidget {
                   width: 150,
                   height: 80,
                   borderRadius: 8,
+                  fit: BoxFit.cover,
                 ),
                 const SizedBox(width: 20),
                 Column(

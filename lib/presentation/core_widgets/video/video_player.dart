@@ -80,12 +80,12 @@ class _AppVidSnapPlayerState extends State<AppVidSnapPlayer> {
     super.dispose();
   }
 
+  double get iconSize => min(widget.width, widget.height) / 4;
+
+  double get videoHeight => min(widget.height, player.size.height);
+
   @override
   Widget build(BuildContext context) {
-    final iconSize = min(widget.width, widget.height) / 4;
-
-    final videoHeight = min(widget.height, player.size.height);
-
     return AppClickable(
       key: ValueKey(player.hashCode),
       onPressed: onTap,
@@ -95,7 +95,6 @@ class _AppVidSnapPlayerState extends State<AppVidSnapPlayer> {
             width: widget.width,
             height: videoHeight,
             player: player,
-            alignment: Alignment.center,
           ),
           if (!isPlaying || isCompleted) ...{
             Positioned.fill(

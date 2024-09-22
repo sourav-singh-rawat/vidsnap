@@ -9,7 +9,7 @@ class AppVideoThumbnail extends StatefulWidget {
   final double height;
   final double? borderRadius;
   final AppVideoPlayer? player;
-  final Alignment? alignment;
+  final BoxFit? fit;
   const AppVideoThumbnail({
     super.key,
     this.dataSource,
@@ -17,7 +17,7 @@ class AppVideoThumbnail extends StatefulWidget {
     required this.height,
     this.borderRadius,
     this.player,
-    this.alignment,
+    this.fit,
   });
 
   @override
@@ -49,24 +49,41 @@ class _AppVideoThumbnailState extends State<AppVideoThumbnail> {
     super.dispose();
   }
 
+  double get getScale {
+    if (widget.fit == BoxFit.cover) {
+      final videoContainerRatio = widget.width / widget.height;
+      double videoRatio = player.aspectRatio;
+
+      if (videoRatio < videoContainerRatio) {
+        return videoContainerRatio / videoRatio;
+      } else {
+        return videoRatio / videoContainerRatio;
+      }
+    }
+    return 1;
+  }
+
+  double get iconSize => min(widget.width, widget.height) / 4;
+
   @override
   Widget build(BuildContext context) {
-    final progressBarSize = min(widget.width, widget.height) / 4;
-
     final child = Container(
       width: widget.width,
       height: widget.height,
       color: Colors.black,
-      alignment: widget.alignment,
+      alignment: Alignment.center,
       child: player.isInitialized
-          ? AspectRatio(
-              aspectRatio: player.aspectRatio,
-              child: player.playerPreview(),
+          ? Transform.scale(
+              scale: getScale,
+              child: AspectRatio(
+                aspectRatio: player.aspectRatio,
+                child: player.playerPreview(),
+              ),
             )
           : Center(
               child: SizedBox(
-                width: progressBarSize,
-                height: progressBarSize,
+                width: iconSize,
+                height: iconSize,
                 child: const CircularProgressIndicator(
                   color: Colors.grey,
                 ),
