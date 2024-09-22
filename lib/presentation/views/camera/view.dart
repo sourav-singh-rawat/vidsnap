@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vidsnap/modules/domain/router/router.dart';
 import 'package:vidsnap/presentation/core_widgets/buttons/clickable.dart';
 import 'package:vidsnap/presentation/core_widgets/scaffold.dart';
 import 'package:vidsnap/presentation/views/camera/controller/camera_bloc.dart';
 import 'package:vidsnap/repository/repository.dart';
+import 'package:vidsnap/utils/portrait_mixin.dart';
 
 part 'widgets/action_bar.dart';
 part 'widgets/back_button.dart';
@@ -19,7 +19,7 @@ class CameraView extends StatefulWidget {
   State<CameraView> createState() => _CameraViewState();
 }
 
-class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
+class _CameraViewState extends State<CameraView> with WidgetsBindingObserver, AppPortraitStatefulModeMixin<CameraView> {
   @override
   void initState() {
     super.initState();
@@ -60,6 +60,8 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return AppScaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.black,

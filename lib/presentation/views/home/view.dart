@@ -6,6 +6,7 @@ import 'package:vidsnap/presentation/core_widgets/scaffold.dart';
 import 'package:vidsnap/presentation/core_widgets/video/video_player.dart';
 import 'package:vidsnap/presentation/core_widgets/video/video_thumbnail.dart';
 import 'package:vidsnap/presentation/views/home/controller/home_bloc.dart';
+import 'package:vidsnap/utils/portrait_mixin.dart';
 
 part 'widgets/camera_button.dart';
 part 'widgets/recorded_video_header.dart';
@@ -20,7 +21,7 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
+class _HomeViewState extends State<HomeView> with WidgetsBindingObserver, AppPortraitStatefulModeMixin<HomeView> {
   @override
   void initState() {
     super.initState();
@@ -60,6 +61,8 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return const AppScaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
