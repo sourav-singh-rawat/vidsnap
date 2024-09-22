@@ -66,7 +66,7 @@ class AppCameraImpl implements AppCamera {
       return cameras;
     } catch (error) {
       log("[AppCamera][_availableCameras]: Error: $error");
-      throw ErrorDescription('Opps, Failed to detect camera on device');
+      throw Exception('Opps, Failed to detect camera on device');
     }
   }
 
@@ -83,9 +83,9 @@ class AppCameraImpl implements AppCamera {
           throw SDKInternalException();
         }
 
-        throw ErrorDescription(error.description ?? 'Opps, Camera plugin exception, Try Again');
+        throw Exception(error.description ?? 'Opps, Camera plugin exception, Try Again');
       }
-      throw ErrorDescription('Opps, Something went wrong, Go Back and Try Again!');
+      throw Exception('Opps, Something went wrong, Go Back and Try Again!');
     }
   }
 
@@ -93,7 +93,7 @@ class AppCameraImpl implements AppCamera {
   Future<AppCameraLensDirection> switchCamera() async {
     try {
       if (deviceAvailableCameras == null) {
-        throw ErrorDescription('Failed to detect camera on device');
+        throw Exception('Failed to detect camera on device');
       }
 
       CameraLensDirection _selectedCameraLens = selectedCameraLens ?? CameraLensDirection.back;
@@ -131,7 +131,7 @@ class AppCameraImpl implements AppCamera {
   @override
   Future<void> startRecording() async {
     if (controller == null) {
-      throw ErrorDescription('Turn on the camera.');
+      throw Exception('Turn on the camera.');
     }
 
     try {
@@ -146,7 +146,7 @@ class AppCameraImpl implements AppCamera {
   @override
   Future<Uri> stopRecording() async {
     if (controller == null) {
-      throw ErrorDescription('Opps, Something went wrong. Video not saved!');
+      throw Exception('Opps, Something went wrong. Video not saved!');
     }
     try {
       final video = await controller!.stopVideoRecording();
