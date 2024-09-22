@@ -15,7 +15,7 @@ class _VideoPlayer extends StatelessWidget {
         return AppVidSnapPlayer(
           key: ValueKey(currentPlayingFile.path),
           width: double.maxFinite,
-          height: 250,
+          height: 230,
           player: context.read<HomeBloc>().player,
         );
       },

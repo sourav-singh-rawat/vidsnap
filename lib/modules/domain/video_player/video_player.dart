@@ -21,6 +21,10 @@ abstract class AppVideoPlayer implements AppModule<void> {
 
   Duration get duration;
 
+  double get aspectRatio;
+
+  Size get size;
+
   void addListener(VoidCallback listener);
 
   Future<void> play();

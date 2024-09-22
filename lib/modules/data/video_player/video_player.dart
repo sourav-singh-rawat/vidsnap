@@ -34,19 +34,25 @@ class AppVideoPlayerImpl implements AppVideoPlayer {
   }
 
   @override
-  bool get isInitialized => controller.value.isInitialized ?? false;
+  bool get isInitialized => controller.value.isInitialized;
 
   @override
-  bool get isCompleted => controller.value.isCompleted ?? false;
+  bool get isCompleted => controller.value.isCompleted;
 
   @override
-  bool get isPlaying => controller.value.isPlaying ?? false;
+  bool get isPlaying => controller.value.isPlaying;
 
   @override
-  Duration get position => controller.value.position ?? Duration.zero;
+  Duration get position => controller.value.position;
 
   @override
-  Duration get duration => controller.value.duration ?? Duration.zero;
+  Duration get duration => controller.value.duration;
+
+  @override
+  double get aspectRatio => controller.value.aspectRatio;
+
+  @override
+  Size get size => controller.value.size;
 
   @override
   void addListener(VoidCallback listener) {

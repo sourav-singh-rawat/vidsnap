@@ -9,6 +9,7 @@ class AppVideoThumbnail extends StatefulWidget {
   final double height;
   final double? borderRadius;
   final AppVideoPlayer? player;
+  final Alignment? alignment;
   const AppVideoThumbnail({
     super.key,
     this.dataSource,
@@ -16,6 +17,7 @@ class AppVideoThumbnail extends StatefulWidget {
     required this.height,
     this.borderRadius,
     this.player,
+    this.alignment,
   });
 
   @override
@@ -55,9 +57,10 @@ class _AppVideoThumbnailState extends State<AppVideoThumbnail> {
       width: widget.width,
       height: widget.height,
       color: Colors.black,
+      alignment: widget.alignment,
       child: player.isInitialized
           ? AspectRatio(
-              aspectRatio: widget.width / widget.height,
+              aspectRatio: player.aspectRatio,
               child: player.playerPreview(),
             )
           : Center(

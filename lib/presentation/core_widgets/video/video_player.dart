@@ -84,6 +84,8 @@ class _AppVidSnapPlayerState extends State<AppVidSnapPlayer> {
   Widget build(BuildContext context) {
     final iconSize = min(widget.width, widget.height) / 4;
 
+    final videoHeight = min(widget.height, player.size.height);
+
     return AppClickable(
       key: ValueKey(player.hashCode),
       onPressed: onTap,
@@ -91,8 +93,9 @@ class _AppVidSnapPlayerState extends State<AppVidSnapPlayer> {
         children: [
           AppVideoThumbnail(
             width: widget.width,
-            height: widget.height,
+            height: videoHeight,
             player: player,
+            alignment: Alignment.center,
           ),
           if (!isPlaying || isCompleted) ...{
             Positioned.fill(
