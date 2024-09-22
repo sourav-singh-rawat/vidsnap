@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:vidsnap/modules/data/camera/camera.dart';
 import 'package:vidsnap/modules/domain/module.dart';
 
@@ -15,6 +16,8 @@ abstract class AppCamera implements AppModule<void> {
 
   bool get isInitialized;
 
+  int get sensorOrientation;
+
   Future<AppCameraLensDirection> switchCamera();
 
   Future<void> startRecording();
@@ -24,4 +27,8 @@ abstract class AppCamera implements AppModule<void> {
   Widget cameraPreview({Key? key});
 
   Future<void> dispose();
+
+  Future<void> lockCaptureOrientation([DeviceOrientation? orientation]);
+
+  Future<void> unlockCaptureOrientation();
 }

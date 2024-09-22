@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:vidsnap/modules/domain/camera/camera.dart';
 import 'package:vidsnap/repository/repository.dart';
 import 'package:vidsnap/utils/helper.dart';
@@ -56,6 +57,9 @@ class AppCameraImpl implements AppCamera {
   @override
   bool get isInitialized => _isInitialized;
 
+  @override
+  int get sensorOrientation => controller?.description.sensorOrientation ?? 90;
+
   Future<List<CameraDescription>> _availableCameras() async {
     try {
       final cameras = await availableCameras();
@@ -70,7 +74,6 @@ class AppCameraImpl implements AppCamera {
     try {
       final controller = CameraController(camera, ResolutionPreset.medium);
       await controller.initialize();
-      await controller.lockCaptureOrientation();
 
       return controller;
     } catch (error) {
@@ -157,6 +160,16 @@ class AppCameraImpl implements AppCamera {
       log("[AppCamera][stopRecording]: Error: $error");
       rethrow;
     }
+  }
+
+  @override
+  Future<void> lockCaptureOrientation([DeviceOrientation? orientation]) async {
+    await controller?.lockCaptureOrientation(orientation);
+  }
+
+  @override
+  Future<void> unlockCaptureOrientation() async {
+    await controller?.unlockCaptureOrientation();
   }
 
   @override

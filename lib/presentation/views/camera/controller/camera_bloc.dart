@@ -108,7 +108,7 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
     }
   }
 
-  void _onPressedBack(OnPressedBack event, Emitter<CameraState> emit) {
+  void _onPressedBack(OnPressedBack event, Emitter<CameraState> emit) async {
     AppRouter.instance.pop(event.context, state.recentRecordedVideoUri);
 
     emit.call(CameraState(

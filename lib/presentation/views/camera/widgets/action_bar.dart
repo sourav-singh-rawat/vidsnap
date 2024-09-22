@@ -12,7 +12,10 @@ class _ActionBar extends StatelessWidget {
           return Container(
             color: Colors.white.withOpacity(0.025),
             width: double.maxFinite,
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 8,
+            ),
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
