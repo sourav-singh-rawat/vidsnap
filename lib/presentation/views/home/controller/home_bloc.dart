@@ -47,9 +47,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     final recentRecordedVideoUri = await AppRouter.instance.push<Uri?>(event.context, const CameraView());
 
-    if (recentRecordedVideoUri != null) {
-      add(FetchRecordedFiles(event.context));
-    }
+    // if (recentRecordedVideoUri != null) {
+    add(FetchRecordedFiles(event.context));
+    // }
   }
 
   void _onPressedVideoTile(OnPressedVideoTile event, Emitter<HomeState> emit) async {
