@@ -9,10 +9,13 @@ import 'package:vidsnap/presentation/views/home/controller/home_bloc.dart';
 import 'package:vidsnap/utils/portrait_mixin.dart';
 
 part 'widgets/camera_button.dart';
+part 'widgets/no_video_view.dart';
 part 'widgets/recorded_video_header.dart';
 part 'widgets/recorded_videos/recorded_videos.dart';
 part 'widgets/recorded_videos/video_tile.dart';
 part 'widgets/video_player.dart';
+
+const kCameraButtonTag = 'kCameraButtonTag';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -63,19 +66,30 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver, AppPor
   Widget build(BuildContext context) {
     super.build(context);
 
-    return const AppScaffold(
+    return AppScaffold(
       backgroundColor: Colors.white,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _VideoPlayer(),
-          SizedBox(height: 16),
-          _RecordedVideosHeader(),
-          SizedBox(height: 8),
-          _RecordedVideos(),
-        ],
+      body: BlocSelector<HomeBloc, HomeState, List<AppRecordedFile>>(
+        selector: (state) => state.recordedFiles,
+        builder: (context, recordedFiles) {
+          final hasRecordedFiles = recordedFiles.isNotEmpty;
+
+          if (!hasRecordedFiles) {
+            return const _NoVideoView();
+          }
+
+          return const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _VideoPlayer(),
+              SizedBox(height: 16),
+              _RecordedVideosHeader(),
+              SizedBox(height: 8),
+              _RecordedVideos(),
+            ],
+          );
+        },
       ),
-      floatingActionButton: _CameraButton(),
+      floatingActionButton: const _CameraButton(),
     );
   }
 }
