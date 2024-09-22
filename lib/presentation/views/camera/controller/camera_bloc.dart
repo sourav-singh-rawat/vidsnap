@@ -89,12 +89,11 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
 
   Future<void> _stopRecording(Emitter<CameraState> emit) async {
     try {
-      final videoPath = await AppRepository.camera.stopRecording();
-      //TODO: show preview with this path
+      final recentRecordedVideoUri = await AppRepository.camera.stopRecording();
 
       emit.call(state.copyWith(
         isRecording: false,
-        recordedVideoPath: videoPath,
+        recentRecordedVideoUri: recentRecordedVideoUri,
       ));
     } catch (error) {
       rethrow;
@@ -102,7 +101,7 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
   }
 
   void _onPressedBack(OnPressedBack event, Emitter<CameraState> emit) {
-    AppRouter.instance.pop(event.context, state.recordedVideoPath);
+    AppRouter.instance.pop(event.context, state.recentRecordedVideoUri);
 
     emit.call(CameraState(
       isCameraInitialized: state.isCameraInitialized,

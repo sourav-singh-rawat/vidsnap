@@ -3,29 +3,29 @@ part of 'camera_bloc.dart';
 class CameraState {
   final bool isCameraInitialized;
   final bool isRecording;
-  final String? recordedVideoPath;
+  final Uri? recentRecordedVideoUri;
   const CameraState({
     required this.isCameraInitialized,
     required this.isRecording,
-    this.recordedVideoPath,
+    this.recentRecordedVideoUri,
   });
 
   CameraState.init()
       : this(
           isCameraInitialized: false,
           isRecording: false,
-          recordedVideoPath: null,
+          recentRecordedVideoUri: null,
         );
 
   CameraState copyWith({
     bool? isCameraInitialized,
     bool? isRecording,
-    String? recordedVideoPath,
+    Uri? recentRecordedVideoUri,
   }) {
     return CameraState(
       isCameraInitialized: isCameraInitialized ?? this.isCameraInitialized,
       isRecording: isRecording ?? this.isRecording,
-      recordedVideoPath: recordedVideoPath ?? this.recordedVideoPath,
+      recentRecordedVideoUri: recentRecordedVideoUri ?? this.recentRecordedVideoUri,
     );
   }
 }

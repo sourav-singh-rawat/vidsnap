@@ -56,13 +56,13 @@ class AppFileManagerImpl implements AppFileManager {
   }
 
   @override
-  Future<String> saveFile(Directory directory, Uint8List bytes) async {
+  Future<Uri> saveFile(Directory directory, Uint8List bytes) async {
     try {
       final dateTime = DateTime.now();
       final path = "${directory.path}/${dateTime.millisecondsSinceEpoch}.mp4";
       final file = await File(path).create();
       await file.writeAsBytes(bytes);
-      return path;
+      return file.uri;
     } catch (error) {
       log('[AppFileManager][saveFile]: Error: $error');
       rethrow;

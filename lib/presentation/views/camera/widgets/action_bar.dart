@@ -30,17 +30,29 @@ class _ActionBar extends StatelessWidget {
   }
 }
 
-//TODO: Add Recording Preview Thumbnail
 class _RecordingPreview extends StatelessWidget {
   const _RecordingPreview({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      width: 84,
-      child: SizedBox(
-        width: 24,
-      ),
+    return BlocSelector<CameraBloc, CameraState, Uri?>(
+      selector: (state) => state.recentRecordedVideoUri,
+      builder: (context, recentRecordedVideoUri) {
+        if (recentRecordedVideoUri == null) {
+          return const SizedBox(width: 84);
+        }
+
+        return AppClickable(
+          onPressed: () => context.read<CameraBloc>().add(OnPressedBack(context)),
+          child: AppVideoThumbnail(
+            width: 84,
+            height: 60,
+            dataSource: recentRecordedVideoUri,
+            borderRadius: 8,
+            fit: BoxFit.cover,
+          ),
+        );
+      },
     );
   }
 }

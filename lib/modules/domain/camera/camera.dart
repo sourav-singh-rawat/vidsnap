@@ -19,7 +19,7 @@ abstract class AppCamera implements AppModule<void> {
 
   Future<void> startRecording();
 
-  Future<String> stopRecording();
+  Future<Uri> stopRecording();
 
   Widget cameraPreview();
 

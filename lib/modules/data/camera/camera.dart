@@ -130,7 +130,7 @@ class AppCameraImpl implements AppCamera {
   }
 
   @override
-  Future<String> stopRecording() async {
+  Future<Uri> stopRecording() async {
     if (controller == null) {
       throw ErrorDescription('Opps, Something went wrong. Video not saved!');
     }
@@ -140,8 +140,8 @@ class AppCameraImpl implements AppCamera {
 
       final recordingDirectory = await AppRepository.fileManager.recordingDirectory;
 
-      final path = await AppRepository.fileManager.saveFile(recordingDirectory, bytes);
-      return path;
+      final uri = await AppRepository.fileManager.saveFile(recordingDirectory, bytes);
+      return uri;
     } catch (error) {
       log("[AppCamera][stopRecording]: Error: $error");
       rethrow;

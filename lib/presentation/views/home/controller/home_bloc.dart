@@ -45,9 +45,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   void _onPressedCameraBtn(OnPressedCameraBtn event, Emitter<HomeState> emit) async {
     await player?.pause();
 
-    final recentRecordedVideoPath = await AppRouter.instance.push<String?>(event.context, const CameraView());
+    final recentRecordedVideoUri = await AppRouter.instance.push<Uri?>(event.context, const CameraView());
 
-    if (recentRecordedVideoPath != null) {
+    if (recentRecordedVideoUri != null) {
       add(FetchRecordedFiles(event.context));
     }
   }
