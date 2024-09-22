@@ -68,8 +68,9 @@ class AppCameraImpl implements AppCamera {
 
   Future<CameraController> _initializeCameraController(CameraDescription camera) async {
     try {
-      final controller = CameraController(camera, ResolutionPreset.max);
+      final controller = CameraController(camera, ResolutionPreset.medium);
       await controller.initialize();
+      await controller.lockCaptureOrientation();
 
       return controller;
     } catch (error) {
@@ -86,13 +87,13 @@ class AppCameraImpl implements AppCamera {
   }
 
   @override
-  Future<void> switchCamera() async {
+  Future<AppCameraLensDirection> switchCamera() async {
     try {
       if (deviceAvailableCameras == null) {
         throw ErrorDescription('Failed to detect camera on device');
       }
 
-      CameraLensDirection _selectedCameraLens = selectedCameraLens ?? CameraLensDirection.front;
+      CameraLensDirection _selectedCameraLens = selectedCameraLens ?? CameraLensDirection.back;
       if (selectedCameraLens == CameraLensDirection.front) {
         _selectedCameraLens = CameraLensDirection.back;
       } else {
@@ -104,6 +105,8 @@ class AppCameraImpl implements AppCamera {
       selectedCameraLens = _selectedCameraLens;
 
       _isInitialized = controller?.value.isInitialized ?? false;
+
+      return AppCameraLensDirection.values[_selectedCameraLens.index];
     } catch (error) {
       log("[AppCamera][switchCamera]: Error: $error");
       rethrow;
@@ -111,12 +114,15 @@ class AppCameraImpl implements AppCamera {
   }
 
   @override
-  Widget cameraPreview() {
+  Widget cameraPreview({Key? key}) {
     if (controller == null) {
       return const Offstage();
     }
 
-    return CameraPreview(controller!);
+    return CameraPreview(
+      key: key,
+      controller!,
+    );
   }
 
   @override

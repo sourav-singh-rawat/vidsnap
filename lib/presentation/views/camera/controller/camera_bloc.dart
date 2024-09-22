@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vidsnap/modules/data/camera/camera.dart';
 import 'package:vidsnap/modules/domain/router/router.dart';
 import 'package:vidsnap/repository/repository.dart';
 import 'package:vidsnap/utils/app_services/app_services.dart';
@@ -60,7 +61,11 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
 
   void _switchCameraLens(SwitchCameraLens event, Emitter<CameraState> emit) async {
     try {
-      await AppRepository.camera.switchCamera();
+      final cameraLensDirection = await AppRepository.camera.switchCamera();
+
+      emit.call(state.copyWith(
+        cameraLensDirection: cameraLensDirection,
+      ));
     } catch (error) {
       AppService.snack.show(context: event.context, text: error.toString());
     }
@@ -109,6 +114,7 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
     emit.call(CameraState(
       isCameraInitialized: state.isCameraInitialized,
       isRecording: false,
+      cameraLensDirection: state.cameraLensDirection,
     ));
   }
 }

@@ -10,6 +10,6 @@ class AppVidSnapCamera extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return camera.cameraPreview();
+    return camera.cameraPreview(key: key);
   }
 }

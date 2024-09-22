@@ -15,13 +15,13 @@ abstract class AppCamera implements AppModule<void> {
 
   bool get isInitialized;
 
-  Future<void> switchCamera();
+  Future<AppCameraLensDirection> switchCamera();
 
   Future<void> startRecording();
 
   Future<Uri> stopRecording();
 
-  Widget cameraPreview();
+  Widget cameraPreview({Key? key});
 
   Future<void> dispose();
 }
