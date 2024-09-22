@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vidsnap/modules/domain/router/router.dart';
 import 'package:vidsnap/repository/repository.dart';
 import 'package:vidsnap/utils/app_services/app_services.dart';
+import 'package:vidsnap/utils/helper.dart';
 
 part 'camera_event.dart';
 part 'camera_state.dart';
@@ -28,6 +29,8 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
 
     try {
       isInitialized = await AppRepository.camera.initialize();
+    } on SDKInternalException {
+      //
     } catch (error) {
       AppService.snack.show(context: event.context, text: error.toString());
     }
