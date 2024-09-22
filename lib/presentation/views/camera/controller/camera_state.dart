@@ -14,10 +14,11 @@ class CameraState {
 
   CameraState.init()
       : this(
-            isCameraInitialized: false,
-            isRecording: false,
-            recentRecordedVideoUri: null,
-            cameraLensDirection: AppCameraLensDirection.back);
+          isCameraInitialized: false,
+          isRecording: false,
+          recentRecordedVideoUri: null,
+          cameraLensDirection: AppCameraLensDirection.back,
+        );
 
   CameraState copyWith({
     bool? isCameraInitialized,
