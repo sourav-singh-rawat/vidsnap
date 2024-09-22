@@ -25,7 +25,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       final files = AppRepository.fileManager.getFiles(recordingDirectory);
 
       final videoFiles = files.map((v) => AppRecordedFile.fromFileEntity(v)).toList();
-      videoFiles.sort((a, b) => a.modified.compareTo(b.modified));
+      videoFiles.sort((a, b) => b.modified.compareTo(a.modified));
 
       if (videoFiles.isNotEmpty) {
         //TODO: handle if already playing a video
