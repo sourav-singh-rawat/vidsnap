@@ -13,7 +13,12 @@ class _TimerState extends State<_Timer> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    debugPrint("initState called");
     _ticker = createTicker((elapsed) {
+      if (!mounted) {
+        return;
+      }
+
       setState(() {
         _elapsed = elapsed;
       });
@@ -26,6 +31,14 @@ class _TimerState extends State<_Timer> with SingleTickerProviderStateMixin {
     } else if (!state.isRecording && _ticker.isActive) {
       _ticker.stop();
     }
+  }
+
+  @override
+  void deactivate() {
+    if (_ticker.isActive) {
+      _ticker.stop();
+    }
+    super.deactivate();
   }
 
   @override

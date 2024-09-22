@@ -106,7 +106,7 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
 
     emit.call(CameraState(
       isCameraInitialized: state.isCameraInitialized,
-      isRecording: state.isRecording,
+      isRecording: false,
     ));
   }
 }
