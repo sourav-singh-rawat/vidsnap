@@ -17,9 +17,10 @@ class _CameraPreview extends StatelessWidget {
                 return AppVidSnapCamera(camera: AppRepository.camera);
               }
 
-              //TODO: capture thumbnail
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  color: Colors.grey,
+                ),
               );
             },
           ),
