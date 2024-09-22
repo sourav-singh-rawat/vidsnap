@@ -29,10 +29,7 @@ class _AppVidSnapCameraState extends State<AppVidSnapCamera> {
   Widget build(BuildContext context) {
     return OrientationBuilder(
       builder: (context, orientation) {
-        return RotatedBox(
-          quarterTurns: 1 - widget.camera.sensorOrientation ~/ 90,
-          child: widget.camera.cameraPreview(key: widget.key),
-        );
+        return widget.camera.cameraPreview(key: widget.key);
       },
     );
   }

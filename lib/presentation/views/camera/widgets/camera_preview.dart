@@ -11,20 +11,14 @@ class _CameraPreview extends StatelessWidget {
           width: constraints.maxWidth,
           height: constraints.maxHeight,
           alignment: Alignment.center,
-          child: BlocSelector<CameraBloc, CameraState, bool>(
-            selector: (state) => state.isCameraInitialized,
-            builder: (context, isCameraInitialized) {
-              if (isCameraInitialized) {
+          child: BlocBuilder<CameraBloc, CameraState>(
+            builder: (context, state) {
+              if (state.isCameraInitialized) {
                 return AspectRatio(
                   aspectRatio: constraints.maxWidth / constraints.maxHeight,
-                  child: BlocSelector<CameraBloc, CameraState, AppCameraLensDirection>(
-                    selector: (state) => state.cameraLensDirection,
-                    builder: (context, cameraLensDirection) {
-                      return AppVidSnapCamera(
-                        key: ValueKey(cameraLensDirection.index),
-                        camera: AppRepository.camera,
-                      );
-                    },
+                  child: AppVidSnapCamera(
+                    key: ValueKey(state.cameraLensDirection.index),
+                    camera: AppRepository.camera,
                   ),
                 );
               }
