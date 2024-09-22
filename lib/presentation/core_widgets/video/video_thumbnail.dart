@@ -1,17 +1,21 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:vidsnap/modules/domain/video_player/video_player.dart';
 
 class AppVideoThumbnail extends StatefulWidget {
-  final Uri dataSource;
+  final Uri? dataSource;
   final double width;
   final double height;
   final double? borderRadius;
+  final AppVideoPlayer? player;
   const AppVideoThumbnail({
     super.key,
-    required this.dataSource,
+    this.dataSource,
     required this.width,
     required this.height,
     this.borderRadius,
+    this.player,
   });
 
   @override
@@ -23,18 +27,30 @@ class _AppVideoThumbnailState extends State<AppVideoThumbnail> {
   @override
   void initState() {
     super.initState();
-    player = AppVideoPlayer.asset(widget.dataSource);
-    player.initialize().then((_) => setState(() {}));
+    if (widget.player != null) {
+      player = widget.player!;
+    } else {
+      player = AppVideoPlayer.asset(widget.dataSource!);
+    }
+
+    if (!player.isInitialized) {
+      player.initialize().then((_) => setState(() {}));
+    }
   }
 
   @override
   void dispose() {
-    player.dispose();
+    if (widget.player == null) {
+      player.dispose();
+    }
+
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final progressBarSize = min(widget.width, widget.height) / 4;
+
     final child = Container(
       width: widget.width,
       height: widget.height,
@@ -44,11 +60,11 @@ class _AppVideoThumbnailState extends State<AppVideoThumbnail> {
               aspectRatio: widget.width / widget.height,
               child: player.playerPreview(),
             )
-          : const Center(
+          : Center(
               child: SizedBox(
-                width: 16,
-                height: 16,
-                child: CircularProgressIndicator(
+                width: progressBarSize,
+                height: progressBarSize,
+                child: const CircularProgressIndicator(
                   color: Colors.grey,
                 ),
               ),

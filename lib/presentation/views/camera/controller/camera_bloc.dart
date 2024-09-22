@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vidsnap/modules/domain/router/router.dart';
 import 'package:vidsnap/repository/repository.dart';
 import 'package:vidsnap/utils/app_services/app_services.dart';
 
@@ -12,6 +13,7 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
     on<DisposeCamera>(_disposeCamera);
     on<SwitchCameraLens>(_switchCameraLens);
     on<OnPressedRecordingBtn>(_onPressedRecordingBtn);
+    on<OnPressedBack>(_onPressedBack);
   }
 
   void _initializeCamera(InitializeCamera event, Emitter<CameraState> emit) async {
@@ -92,9 +94,19 @@ class CameraBloc extends Bloc<CameraEvent, CameraState> {
 
       emit.call(state.copyWith(
         isRecording: false,
+        recordedVideoPath: videoPath,
       ));
     } catch (error) {
       rethrow;
     }
+  }
+
+  void _onPressedBack(OnPressedBack event, Emitter<CameraState> emit) {
+    AppRouter.instance.pop(event.context, state.recordedVideoPath);
+
+    emit.call(CameraState(
+      isCameraInitialized: state.isCameraInitialized,
+      isRecording: state.isRecording,
+    ));
   }
 }

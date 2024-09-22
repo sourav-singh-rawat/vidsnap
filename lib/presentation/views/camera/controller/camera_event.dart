@@ -13,6 +13,10 @@ final class DisposeCamera extends CameraEvent {
   DisposeCamera(super.context);
 }
 
+final class OnPressedBack extends CameraEvent {
+  OnPressedBack(super.context);
+}
+
 final class SwitchCameraLens extends CameraEvent {
   SwitchCameraLens(super.context);
 }

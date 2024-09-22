@@ -8,11 +8,13 @@ class _RecordedVideos extends StatelessWidget {
     return Expanded(
       child: BlocSelector<HomeBloc, HomeState, List<AppRecordedFile>>(
         selector: (state) => state.recordedFiles,
-        builder: (context, recordedFiles) {
+        builder: (context, files) {
           return ListView.builder(
-            itemCount: recordedFiles.length,
+            itemCount: files.length,
             itemBuilder: (BuildContext context, int index) {
-              return _VideoTile(recordedFile: recordedFiles[index]);
+              return _VideoTile(
+                file: files[index],
+              );
             },
           );
         },

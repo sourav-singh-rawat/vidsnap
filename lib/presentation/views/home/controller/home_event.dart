@@ -12,3 +12,11 @@ final class FetchRecordedFiles extends HomeEvent {
 final class OnPressedCameraBtn extends HomeEvent {
   OnPressedCameraBtn(super.context);
 }
+
+final class OnPressedVideoTile extends HomeEvent {
+  final AppRecordedFile file;
+  OnPressedVideoTile(
+    super.context, {
+    required this.file,
+  });
+}

@@ -13,6 +13,16 @@ abstract class AppVideoPlayer implements AppModule<void> {
 
   bool get isInitialized;
 
+  bool get isCompleted;
+
+  bool get isPlaying;
+
+  Duration get position;
+
+  Duration get duration;
+
+  void addListener(VoidCallback listener);
+
   Future<void> play();
 
   Future<void> pause();

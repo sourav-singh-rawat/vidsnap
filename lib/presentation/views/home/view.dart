@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vidsnap/modules/data/file_manager/file_manager.dart';
 import 'package:vidsnap/presentation/core_widgets/buttons/clickable.dart';
 import 'package:vidsnap/presentation/core_widgets/scaffold.dart';
+import 'package:vidsnap/presentation/core_widgets/video/video_player.dart';
 import 'package:vidsnap/presentation/core_widgets/video/video_thumbnail.dart';
 import 'package:vidsnap/presentation/views/home/controller/home_bloc.dart';
 
@@ -24,7 +25,14 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+
     context.read<HomeBloc>().add(FetchRecordedFiles(context));
+  }
+
+  @override
+  void deactivate() {
+    context.read<HomeBloc>().player?.dispose();
+    super.deactivate();
   }
 
   @override
@@ -33,12 +41,21 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
     super.dispose();
   }
 
+  bool get isPlayerInitialized =>
+      context.read<HomeBloc>().player != null && (context.read<HomeBloc>().player?.isInitialized ?? false);
+  bool get isPlayerPlaying => context.read<HomeBloc>().player?.isPlaying ?? false;
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
 
-    if (state == AppLifecycleState.resumed) {
-    } else if (state == AppLifecycleState.paused || state == AppLifecycleState.detached) {}
+    if (state == AppLifecycleState.inactive) {
+      if (isPlayerInitialized && isPlayerPlaying) {
+        context.read<HomeBloc>().player?.pause();
+      }
+    } else if (state == AppLifecycleState.resumed) {
+      //
+    }
   }
 
   @override
