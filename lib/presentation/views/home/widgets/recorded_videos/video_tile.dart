@@ -35,6 +35,8 @@ class _VideoTile extends StatelessWidget {
                 style: const TextStyle(
                   fontWeight: FontWeight.w500,
                 ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
               ),
               const SizedBox(height: 8),
               Text(
@@ -43,6 +45,8 @@ class _VideoTile extends StatelessWidget {
                   fontSize: 12,
                   color: Colors.grey,
                 ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
               ),
               Text(
                 'Time: ${file.formattedModifiedTime}',
@@ -50,6 +54,8 @@ class _VideoTile extends StatelessWidget {
                   fontSize: 12,
                   color: Colors.grey,
                 ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
               ),
             ],
           ),
