@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vidsnap/presentation/core_widgets/buttons/clickable.dart';
+import 'package:vidsnap/presentation/core_widgets/camera/camera.dart';
 import 'package:vidsnap/presentation/core_widgets/scaffold.dart';
 import 'package:vidsnap/presentation/views/camera/controller/camera_bloc.dart';
 import 'package:vidsnap/repository/repository.dart';

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:vidsnap/modules/data/camera/camera.dart';
 import 'package:vidsnap/modules/domain/module.dart';
 
@@ -12,11 +13,15 @@ abstract class AppCamera implements AppModule<void> {
 
   Future<bool> initialize();
 
+  bool get isInitialized;
+
   Future<void> switchCamera();
 
   Future<void> startRecording();
 
   Future<String> stopRecording();
+
+  Widget cameraPreview();
 
   Future<void> dispose();
 }

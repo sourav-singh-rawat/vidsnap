@@ -8,7 +8,7 @@ import 'package:vidsnap/repository/repository.dart';
 part 'utils/helper.dart';
 
 class AppCameraImpl implements AppCamera {
-  bool isInitialized = false;
+  bool _isInitialized = false;
   List<CameraDescription>? deviceAvailableCameras;
   CameraController? controller;
   CameraLensDirection? selectedCameraLens;
@@ -42,15 +42,18 @@ class AppCameraImpl implements AppCamera {
 
         selectedCameraLens = deviceAvailableCameras![0].lensDirection;
 
-        isInitialized = controller?.value.isInitialized ?? false;
+        _isInitialized = controller?.value.isInitialized ?? false;
       }
 
-      return isInitialized;
+      return _isInitialized;
     } catch (error) {
       log("[AppCamera][_availableCameras]: Error");
       rethrow;
     }
   }
+
+  @override
+  bool get isInitialized => _isInitialized;
 
   Future<List<CameraDescription>> _availableCameras() async {
     try {
@@ -95,13 +98,14 @@ class AppCameraImpl implements AppCamera {
 
       selectedCameraLens = _selectedCameraLens;
 
-      isInitialized = controller?.value.isInitialized ?? false;
+      _isInitialized = controller?.value.isInitialized ?? false;
     } catch (error) {
       log("[AppCamera][switchCamera]: Error: $error");
       rethrow;
     }
   }
 
+  @override
   Widget cameraPreview() {
     if (controller == null) {
       return const Offstage();
@@ -151,7 +155,7 @@ class AppCameraImpl implements AppCamera {
       controller = null;
       deviceAvailableCameras = null;
       selectedCameraLens = null;
-      isInitialized = false;
+      _isInitialized = false;
     } catch (error) {
       log("[AppCamera][dispose]: Error: $error");
       rethrow;
