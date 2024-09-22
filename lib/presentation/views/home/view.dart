@@ -64,13 +64,14 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver, AppPor
     super.build(context);
 
     return const AppScaffold(
+      backgroundColor: Colors.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _VideoPlayer(),
           SizedBox(height: 16),
           _RecordedVideosHeader(),
-          SizedBox(height: 16),
+          SizedBox(height: 8),
           _RecordedVideos(),
         ],
       ),
