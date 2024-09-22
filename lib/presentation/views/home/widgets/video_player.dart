@@ -9,18 +9,7 @@ class _VideoPlayer extends StatelessWidget {
       selector: (state) => state.currentPlayingFile,
       builder: (context, currentPlayingFile) {
         if (currentPlayingFile == null) {
-          return Container(
-            width: double.maxFinite,
-            height: 250,
-            color: Colors.black,
-            child: const Center(
-              child: Icon(
-                Icons.error_outline,
-                size: 250 / 4,
-                color: Colors.white,
-              ),
-            ),
-          );
+          return const _VideoPlayerLoading();
         }
 
         return AppVidSnapPlayer(
@@ -30,6 +19,30 @@ class _VideoPlayer extends StatelessWidget {
           player: context.read<HomeBloc>().player,
         );
       },
+    );
+  }
+}
+
+class _VideoPlayerLoading extends StatelessWidget {
+  const _VideoPlayerLoading({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    const iconSize = 250 / 4;
+
+    return Container(
+      width: double.maxFinite,
+      height: 250,
+      color: Colors.black,
+      child: const Center(
+        child: SizedBox(
+          width: iconSize,
+          height: iconSize,
+          child: CircularProgressIndicator(
+            color: Colors.grey,
+          ),
+        ),
+      ),
     );
   }
 }
