@@ -8,8 +8,9 @@ class _Timer extends StatefulWidget {
 }
 
 class _TimerState extends State<_Timer> with SingleTickerProviderStateMixin {
-  Duration _elapsed = Duration.zero;
   late final Ticker _ticker;
+  ValueNotifier<Duration> _elapsed = ValueNotifier(Duration.zero);
+
   @override
   void initState() {
     super.initState();
@@ -19,9 +20,7 @@ class _TimerState extends State<_Timer> with SingleTickerProviderStateMixin {
         return;
       }
 
-      setState(() {
-        _elapsed = elapsed;
-      });
+      _elapsed.value = elapsed;
     });
   }
 
@@ -47,10 +46,10 @@ class _TimerState extends State<_Timer> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
-  String get _formattedTimeText {
-    final hours = _elapsed.inHours.toString().padLeft(2, '0');
-    final min = _elapsed.inMinutes.toString().padLeft(2, '0');
-    final sec = _elapsed.inSeconds.toString().padLeft(2, '0');
+  String _formattedTimeText(Duration value) {
+    final hours = value.inHours.toString().padLeft(2, '0');
+    final min = value.inMinutes.toString().padLeft(2, '0');
+    final sec = value.inSeconds.toString().padLeft(2, '0');
     return '$hours:$min:$sec';
   }
 
@@ -72,13 +71,18 @@ class _TimerState extends State<_Timer> with SingleTickerProviderStateMixin {
             horizontal: 16,
             vertical: 8,
           ),
-          child: Text(
-            _formattedTimeText,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Colors.white,
-            ),
+          child: ValueListenableBuilder(
+            valueListenable: _elapsed,
+            builder: (context, value, child) {
+              return Text(
+                _formattedTimeText(value),
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
+              );
+            },
           ),
         );
       },
