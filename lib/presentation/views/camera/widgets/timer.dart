@@ -7,15 +7,14 @@ class _Timer extends StatefulWidget {
   State<_Timer> createState() => _TimerState();
 }
 
-class _TimerState extends State<_Timer> with SingleTickerProviderStateMixin {
+class _TimerState extends State<_Timer> {
   late final Ticker _ticker;
-  ValueNotifier<Duration> _elapsed = ValueNotifier(Duration.zero);
-
+  final ValueNotifier<Duration> _elapsed = ValueNotifier(Duration.zero);
   @override
   void initState() {
     super.initState();
     debugPrint("initState called");
-    _ticker = createTicker((elapsed) {
+    _ticker = Ticker((elapsed) {
       if (!mounted) {
         return;
       }
